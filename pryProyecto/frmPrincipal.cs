@@ -35,10 +35,12 @@ namespace pryProyecto
             pcbAlumnos.Parent = pcbMenu;
             pcbCarreras.Parent = pcbMenu;
             pcbDocente.Parent = pcbMenu;
+            pcbTutores.Parent = pcbMenu;
             pcbUsuario.Parent = pcbMenu;
             pcbAlumnos.BackColor = Color.Transparent;
             pcbCarreras.BackColor = Color.Transparent;
             pcbDocente.BackColor = Color.Transparent;
+            pcbTutores.BackColor = Color.Transparent;
             pcbUsuario.BackColor = Color.Transparent;
 
             pcbCarreras.Enabled = clsLogin.EsAdministrador;
@@ -48,7 +50,7 @@ namespace pryProyecto
             pcbAlumnos.Enabled = clsLogin.EsAdministrador || clsLogin.EsDocente;
         }
 
-      
+
         private void pcbCarreras_Click(object sender, EventArgs e)
         {
             principal = new clsPrincipal();

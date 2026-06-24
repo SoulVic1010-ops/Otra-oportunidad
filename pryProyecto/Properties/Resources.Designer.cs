@@ -93,6 +93,16 @@ namespace pryProyecto.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Contorno {
+            get {
+                object obj = ResourceManager.GetObject("Contorno", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Docente {
             get {
                 object obj = ResourceManager.GetObject("Docente", resourceCulture);
@@ -216,6 +226,16 @@ namespace pryProyecto.Properties {
         internal static System.Drawing.Bitmap sombrero {
             get {
                 object obj = ResourceManager.GetObject("sombrero", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tutor {
+            get {
+                object obj = ResourceManager.GetObject("tutor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
