@@ -48,13 +48,13 @@ namespace pryProyecto
 
 				using (var conexion = conexionBD.AbrirConexion())
 				{
-					string sql = @"SELECT idTutor AS Clave  nombreTutor AS Nombre,  parentesco AS Parentesco, direccion AS Dirección,  telefono AS Teléfono, correo AS Correo FROM tblTutores WHERE nombreTutor LIKE @nombre;";
+					string sql = "SELECT idTutor AS Clave, nombreTutor AS Nombre, parentesco AS Parentesco, direccion AS Dirección, telefono AS Teléfono, correo AS Correo FROM tblTutores WHERE nombreTutor LIKE @nombretutor;";
   
 
 
 					using (var consultar = new MySqlCommand(sql, conexion))
 					{
-						consultar.Parameters.AddWithValue("@nombre", "%" + Nombretutor + "%");
+						consultar.Parameters.AddWithValue("@nombretutor", "%" + nombretutor + "%");
 
 						using (consulta = new MySqlDataAdapter(consultar))
 						{
