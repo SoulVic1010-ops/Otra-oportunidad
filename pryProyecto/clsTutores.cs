@@ -23,6 +23,22 @@ namespace pryProyecto
         public string Telefono1 { get => Telefono; set => Telefono = value; }
         public string Correo1 { get => Correo; set => Correo = value; }
 
+        private string descripcion;
+        private int idTutor;
+
+		private string nombretutor;
+        //usamos un adaptador
+        private MySqlDataAdapter consulta;
+        //usamos un command para insertar o actualizar
+        private MySqlCommand comando;
+        //Usamos una tabla temporal
+        private DataTable tabla;
+
+        public string Nombretutor { get => nombretutor; set => nombretutor = value; }
+        public string Descripcion { get => descripcion; set => descripcion = value; }
+        public int IdTutor { get => idTutor; set => idTutor = value; }
+>>>>>>> No che
+
         public DataTable cargarDataGrid()
 		{
 			tabla = new DataTable();
@@ -81,6 +97,9 @@ namespace pryProyecto
 
 			return tabla;
 		}
+<<<<<<< HEAD
+=======
+
         public string GuardarActualizar(int TipoOperacion)
         {
             string msg = "";
@@ -136,6 +155,66 @@ namespace pryProyecto
             }
 
             return msg;
+=======
+                        case 0://insertar new
+                            {
+                                string sqlN = "INSERT INTO tblcarreras (nombreCarrera,descrpcion) VALUES ('@nombreCarrera','@descripcion');";
+                                using (comando = new MySqlCommand(sqlN, conexion))
+                                {
+                                    comando.Parameters.AddWithValue("idTutor", idTutor);
+                                    comando.Parameters.AddWithValue("nombreTutor", nombretutor);
+                                    comando.Parameters.AddWithValue("descrpcion", descripcion);
+
+                                    int filasAfectadas = comando.ExecuteNonQuery();
+                                    if (filasAfectadas > 0)
+                                    {
+                                        msg = "el registro se guardo correctamente";
+
+                                    }
+                                    else
+                                    {
+                                        msg = "Error, no se guardaron los dartos...";
+                                    }
+
+
+                                }
+                            }//libera la operacion de la actualizacion
+                            break;
+                        case 1:
+                            {
+                                string sqlA = "UPDATE tblcarreras C SET C.nombreCarrera=@nombreCarrera,C.descrpcion=@descrpcion WHERE C.idCarrera=@idCarrera;";
+                                using (comando = new MySqlCommand(sqlA, conexion))
+                                {
+                                    comando.Parameters.AddWithValue("nombreTutor", nombretutor);
+                                    comando.Parameters.AddWithValue("descrpcion", descripcion);
+
+                                    int filasAfectadas = comando.ExecuteNonQuery();
+                                    if (filasAfectadas > 0)
+                                    {
+                                        msg = "el registro se guardo correctamente";
+
+                                    }
+                                    else
+                                    {
+                                        msg = "Error, no se guardaron los dartos...";
+                                    }
+
+
+                                }
+                            }//Actualizar old
+                            break;
+
+                    }
+
+                }//Libera la conexion
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error" + ex.Message);
+            }
+
+            return msg;
+
         }
     }
 }
