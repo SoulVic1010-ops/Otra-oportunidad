@@ -78,7 +78,7 @@
 			btnEliminar.BackgroundImage = (Image)resources.GetObject("btnEliminar.BackgroundImage");
 			btnEliminar.BackgroundImageLayout = ImageLayout.Stretch;
 			btnEliminar.ForeColor = SystemColors.Control;
-			btnEliminar.Location = new Point(208, 113);
+			btnEliminar.Location = new Point(527, 113);
 			btnEliminar.Name = "btnEliminar";
 			btnEliminar.Size = new Size(132, 54);
 			btnEliminar.TabIndex = 4;
@@ -102,11 +102,12 @@
 			btnNuevo.BackColor = SystemColors.Control;
 			btnNuevo.BackgroundImage = (Image)resources.GetObject("btnNuevo.BackgroundImage");
 			btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
-			btnNuevo.Location = new Point(527, 113);
+			btnNuevo.Location = new Point(208, 113);
 			btnNuevo.Name = "btnNuevo";
 			btnNuevo.Size = new Size(127, 54);
 			btnNuevo.TabIndex = 2;
 			btnNuevo.UseVisualStyleBackColor = false;
+			btnNuevo.Click += btnNuevo_Click;
 			// 
 			// txtDescripcion
 			// 
