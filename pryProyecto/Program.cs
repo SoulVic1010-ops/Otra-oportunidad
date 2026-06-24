@@ -13,7 +13,7 @@ namespace pryProyecto
                 if (login.ShowDialog() == DialogResult.OK)
                 {
 
-                    Application.Run(new frmCarreras());
+                    Application.Run(new frmPrincipal());
 
                 }
             }
