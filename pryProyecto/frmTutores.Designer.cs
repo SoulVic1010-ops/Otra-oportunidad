@@ -31,6 +31,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTutores));
 			dgvTutores = new DataGridView();
 			pnlPrincipal = new Panel();
+			txtBuscarTutores = new TextBox();
 			btnEliminar = new Button();
 			btnGuardar = new Button();
 			btnNuevo = new Button();
@@ -41,7 +42,6 @@
 			txtNombre = new TextBox();
 			lblTutor = new Label();
 			pictureBox1 = new PictureBox();
-			txtBuscarTutores = new TextBox();
 			((System.ComponentModel.ISupportInitialize)dgvTutores).BeginInit();
 			pnlPrincipal.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -76,6 +76,16 @@
 			pnlPrincipal.Name = "pnlPrincipal";
 			pnlPrincipal.Size = new Size(822, 286);
 			pnlPrincipal.TabIndex = 1;
+			// 
+			// txtBuscarTutores
+			// 
+			txtBuscarTutores.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtBuscarTutores.Location = new Point(668, 241);
+			txtBuscarTutores.Name = "txtBuscarTutores";
+			txtBuscarTutores.PlaceholderText = "Buscar Tutores";
+			txtBuscarTutores.Size = new Size(140, 33);
+			txtBuscarTutores.TabIndex = 11;
+			txtBuscarTutores.TextChanged += txtBuscarTutores_TextChanged;
 			// 
 			// btnEliminar
 			// 
@@ -181,15 +191,6 @@
 			pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 			pictureBox1.TabIndex = 0;
 			pictureBox1.TabStop = false;
-			// 
-			// txtBuscarTutores
-			// 
-			txtBuscarTutores.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			txtBuscarTutores.Location = new Point(668, 241);
-			txtBuscarTutores.Name = "txtBuscarTutores";
-			txtBuscarTutores.PlaceholderText = "Buscar Tutores";
-			txtBuscarTutores.Size = new Size(140, 33);
-			txtBuscarTutores.TabIndex = 11;
 			// 
 			// frmTutores
 			// 
