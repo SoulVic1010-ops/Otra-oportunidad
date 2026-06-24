@@ -17,33 +17,29 @@ namespace pryProyecto
 		public frmCarreras()
 		{
 			InitializeComponent();
-			carreras = new clsCarreras();
-			dgvCarreras.DataSource = null;
-			dgvCarreras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-			try
-			{
-				dgvCarreras.DataSource = carreras.cargarDataGrid();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-		}
+			CargarGrid();
+
+
+        }
+        public void CargarGrid() 
+		{
+            carreras = new clsCarreras();
+            dgvCarreras.DataSource = null;
+            dgvCarreras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            try
+            {
+                dgvCarreras.DataSource = carreras.cargarDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
 		private void txtNombreCarrera_TextChanged(object sender, EventArgs e)
 		{
 			carreras = new clsCarreras();
-			dgvCarreras.DataSource = null;
-			dgvCarreras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-			try
-			{
-				carreras.NombreCarrera = txtNombreCarrera.Text;
-				dgvCarreras.DataSource = carreras.Consultar();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
+			
 		}
 
 		private void dgvCarreras_SelectionChanged(object sender, EventArgs e)
@@ -57,13 +53,29 @@ namespace pryProyecto
 
 		private void btnGuardar_Click(object sender, EventArgs e)
 		{
-			int tipoOperacion = idCarrera == 0 ? 0 : 1;
-			carreras.GuardarActualizar(tipoOperacion);
-		}
+			try
+			{
+				int tipoOperacion = idCarrera == 0 ? 0 : 1;
+				carreras.IdCarrera = idCarrera;
+				carreras.NombreCarrera = txtNombre.Text;
+				carreras.Descripcion = txtDescripcion.Text;
+				string msg = carreras.GuardarActualizar(tipoOperacion);
+				MessageBox.Show(msg);
+				CargarGrid();
+			}
+            catch (Exception ex)
+            {
+				MessageBox.Show(ex.Message);
+			}
+        }
+
 
 		private void btnEliminar_Click(object sender, EventArgs e)
 		{
 			idCarrera = 0;
+			txtNombre.Clear();
+			txtDescripcion.Clear();
+			txtNombre.Focus();
 		}
 	}
 }
