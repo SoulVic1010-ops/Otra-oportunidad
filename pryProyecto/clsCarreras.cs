@@ -93,7 +93,7 @@ namespace pryProyecto
                                 {
                                     comando.Parameters.AddWithValue("idCarrera", idCarrera);
                                     comando.Parameters.AddWithValue("nombreCarrera", nombreCarrera);
-                                    comando.Parameters.AddWithValue("descrpcion", descripcion);
+                                    comando.Parameters.AddWithValue("descripcion", descripcion);
 
                                     int filasAfectadas = comando.ExecuteNonQuery();
                                     if (filasAfectadas > 0)
@@ -103,7 +103,7 @@ namespace pryProyecto
                                     }
                                     else
                                     {
-                                        msg = "Error, no se guardaron los dartos...";
+                                        msg = "Error, no se guardaron los datos...";
                                     }
 
 
@@ -112,11 +112,11 @@ namespace pryProyecto
                             break;
                         case 1:
                             {
-                                string sqlA = "UPDATE tblcarreras C SET C.nombreCarrera=@nombreCarrera,C.descrpcion=@descrocion WHERE C.idCarrera=@idCarrera;";
+                                string sqlA = "UPDATE tblcarreras C SET C.nombreCarrera=@nombreCarrera,C.descripcion=@descripcion WHERE C.idCarrera=@idCarrera;";
                                 using (comando = new MySqlCommand(sqlA, conexion))
                                 {
                                     comando.Parameters.AddWithValue("nombreCarrera", nombreCarrera);
-                                    comando.Parameters.AddWithValue("descrpcion", descripcion);
+                                    comando.Parameters.AddWithValue("descripcion", descripcion);
 
                                     int filasAfectadas = comando.ExecuteNonQuery();
                                     if (filasAfectadas > 0)
@@ -145,6 +145,38 @@ namespace pryProyecto
 
             return msg;
             
+        }
+
+        public string Eliminar()
+        {
+            string msg = "";
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = "DELETE FROM tblcarreras C WHERE C.idCarrera= @idCarrera;";
+                    using (comando = new MySqlCommand(sql, conexion))
+                    {
+                        comando.Parameters.AddWithValue("idCarrera", idCarrera);
+                        int filasAfectadas = comando.ExecuteNonQuery();
+                        if (filasAfectadas > 0)
+                        {
+                            msg = "Datos eliminados correctamente";
+                        }
+                        else
+                        {
+                            msg = "Los datos no se pudieron eliminar";
+                        }
+
+                    }//Libera la eliminación
+
+                }//Liberar las conexiones
+            }catch(Exception ex)
+            {
+                throw new Exception("Error " + ex.Message);
+            }
+            return msg;
         }
     }
 }
