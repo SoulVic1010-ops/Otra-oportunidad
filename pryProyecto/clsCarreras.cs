@@ -112,7 +112,7 @@ namespace pryProyecto
                             break;
                         case 1:
                             {
-                                string sqlA = "UPDATE tblcarreras C SET C.nombreCarrera=@nombreCarrera,C.descrpcion=@descrocion WHERE C.idCarrera=@idCarrera;";
+                                string sqlA = "UPDATE tblcarreras C SET C.nombreCarrera=@nombreCarrera,C.descrpcion=@descrpcion WHERE C.idCarrera=@idCarrera;";
                                 using (comando = new MySqlCommand(sqlA, conexion))
                                 {
                                     comando.Parameters.AddWithValue("nombreCarrera", nombreCarrera);
