@@ -89,12 +89,12 @@ namespace pryProyecto
                     {
                         case 0://insertar new
                             {
-                                string sqlN = "INSERT INTO tblcarreras (nombreCarrera,descrpcion) VALUES ('@nombreCarrera','@descripcion');";
+                                string sqlN = "INSERT INTO tblcarreras (nombreCarrera,descripcion) VALUES (@nombreCarrera,@descripcion);";
                                 using (comando = new MySqlCommand(sqlN, conexion))
                                 {
                                     comando.Parameters.AddWithValue("idCarrera", idCarrera);
                                     comando.Parameters.AddWithValue("nombreCarrera", nombreCarrera);
-                                    comando.Parameters.AddWithValue("descrpcion", descripcion);
+                                    comando.Parameters.AddWithValue("descripcion", descripcion);
 
                                     int filasAfectadas = comando.ExecuteNonQuery();
                                     if (filasAfectadas > 0)
@@ -113,11 +113,12 @@ namespace pryProyecto
                             break;
                         case 1:
                             {
-                                string sqlA = "UPDATE tblcarreras C SET C.nombreCarrera=@nombreCarrera,C.descrpcion=@descrpcion WHERE C.idCarrera=@idCarrera;";
+                                string sqlA = "UPDATE tblcarreras C SET C.nombreCarrera=@nombreCarrera,C.descripcion=@descripcion WHERE C.idCarrera=@idCarrera;";
                                 using (comando = new MySqlCommand(sqlA, conexion))
                                 {
-                                    comando.Parameters.AddWithValue("nombreCarrera", nombreCarrera);
-                                    comando.Parameters.AddWithValue("descrpcion", descripcion);
+									comando.Parameters.AddWithValue("@idCarrera", idCarrera);
+									comando.Parameters.AddWithValue("nombreCarrera", nombreCarrera);
+                                    comando.Parameters.AddWithValue("descripcion", descripcion);
 
                                     int filasAfectadas = comando.ExecuteNonQuery();
                                     if (filasAfectadas > 0)
@@ -146,6 +147,37 @@ namespace pryProyecto
 
             return msg;
             
+        }
+        public string Eliminar()
+        {
+            string msg = "";
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = "DELETE FROM tblCarreras c WHERE c.idCarrera = @idCarrera;";
+                    using (comando = new MySqlCommand(sql, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@idCarrera", idCarrera);
+                        int filasAfectadas = comando.ExecuteNonQuery();
+                        if (filasAfectadas > 0)
+                        {
+                            msg = "Datos eliminados correctamnete";
+                        }
+                        else
+                        {
+                            msg = "Los datos no se pudieron eliminar";
+                        }
+				    }//Libera la eliminacion
+
+				}//Libera las conexion
+
+            }catch(Exception ex)
+            {
+                throw new Exception("Error" + ex.Message);
+            }
+            return msg;
         }
     }
 }
