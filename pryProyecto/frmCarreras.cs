@@ -13,8 +13,9 @@ namespace pryProyecto
 	public partial class frmCarreras : Form
 	{
 		clsCarreras carreras;
-		int idCarrera;
-		public frmCarreras()
+        int idCarrera;
+
+        public frmCarreras()
 		{
 			InitializeComponent();
 			CargarGrid();
@@ -100,10 +101,10 @@ namespace pryProyecto
 
 		private void btnNuevo_Click(object sender, EventArgs e)
 		{
-			idCarrera = 0;
-			txtNombre.Clear();
-			txtDescripcion.Clear();
-			txtNombre.Focus();
-		}
+            idCarrera = 0;
+            txtNombre.Clear();
+            txtDescripcion.Clear();
+            txtNombre.Focus();
+        }
 	}
 }
