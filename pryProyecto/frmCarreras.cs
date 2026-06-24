@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace pryProyecto
 {
-	public partial class frmCarreras : Form
-	{
-		clsCarreras carreras;
-		int idCarrera;
-		public frmCarreras()
-		{
-			InitializeComponent();
-			CargarGrid();
+    public partial class frmCarreras : Form
+    {
+        clsCarreras carreras;
+        int idCarrera;
+        public frmCarreras()
+        {
+            InitializeComponent();
+            CargarGrid();
 
 
         }
-        public void CargarGrid() 
-		{
+        public void CargarGrid()
+        {
             carreras = new clsCarreras();
             dgvCarreras.DataSource = null;
             dgvCarreras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -36,8 +36,8 @@ namespace pryProyecto
             }
         }
 
-		private void txtNombreCarrera_TextChanged(object sender, EventArgs e)
-		{
+        private void txtNombreCarrera_TextChanged(object sender, EventArgs e)
+        {
             carreras = new clsCarreras();
             dgvCarreras.DataSource = null;
             dgvCarreras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -54,40 +54,72 @@ namespace pryProyecto
 
         }
 
-		private void dgvCarreras_SelectionChanged(object sender, EventArgs e)
-		{
-			//Este es el campo oculto que me servira de referencia para actualizar y eliminar
-			idCarrera = int.Parse(dgvCarreras.CurrentRow.Cells[0].Value.ToString());
+        private void dgvCarreras_SelectionChanged(object sender, EventArgs e)
+        {
+            //Este es el campo oculto que me servira de referencia para actualizar y eliminar
+            idCarrera = int.Parse(dgvCarreras.CurrentRow.Cells[0].Value.ToString());
 
-			txtNombre.Text = dgvCarreras.CurrentRow.Cells[1].Value.ToString();
-			txtDescripcion.Text = dgvCarreras.CurrentRow.Cells[2].Value.ToString();
-		}
+            txtNombre.Text = dgvCarreras.CurrentRow.Cells[1].Value.ToString();
+            txtDescripcion.Text = dgvCarreras.CurrentRow.Cells[2].Value.ToString();
+        }
 
-		private void btnGuardar_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				int tipoOperacion = idCarrera == 0 ? 0 : 1;
-				carreras.IdCarrera = idCarrera;
-				carreras.NombreCarrera = txtNombre.Text;
-				carreras.Descripcion = txtDescripcion.Text;
-				string msg = carreras.GuardarActualizar(tipoOperacion);
-				MessageBox.Show(msg);
-				CargarGrid();
-			}
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int tipoOperacion = idCarrera == 0 ? 0 : 1;
+                carreras.IdCarrera = idCarrera;
+                carreras.NombreCarrera = txtNombre.Text;
+                carreras.Descripcion = txtDescripcion.Text;
+                string msg="";
+                if (tipoOperacion != 0)
+                {
+                    var resp = MessageBox.Show("Confirmar que se desea actualizar el dato seleccionado", "Alerta!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (resp == DialogResult.Yes)
+                    {
+                        msg = carreras.GuardarActualizar(tipoOperacion);
+                    }
+                    
+                }
+                else
+                {
+                    msg = carreras.GuardarActualizar(tipoOperacion);
+                    MessageBox.Show(msg);
+                }
+                CargarGrid();
+            }
             catch (Exception ex)
             {
-				MessageBox.Show(ex.Message);
-			}
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
-		private void btnEliminar_Click(object sender, EventArgs e)
-		{
-			idCarrera = 0;
-			txtNombre.Clear();
-			txtDescripcion.Clear();
-			txtNombre.Focus();
-		}
-	}
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            idCarrera = 0;
+            txtNombre.Clear();
+            txtDescripcion.Clear();
+            txtNombre.Focus();
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                carreras.IdCarrera = idCarrera;
+                var resp = MessageBox.Show("Confirmar que se le selecciona el dato seleccionado", "Alerta!!",MessageBoxButtons.YesNo,MessageBoxIcon.Stop);
+                if (resp == DialogResult.Yes)
+                {
+                    string msg = carreras.Eliminar();
+                    MessageBox.Show(msg);
+                    CargarGrid();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+    }
 }
