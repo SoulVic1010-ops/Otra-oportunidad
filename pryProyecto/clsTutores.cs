@@ -11,26 +11,20 @@ namespace pryProyecto
 		private MySqlCommand comando;
 		private string nombretutor;
 		private int id_Tutores;
-		private string Parentesco;
-		private string Direccion;
-		private string Telefono;
-		private string Correo;
+		private string parentesco;
+		private string direccion;
+		private string telefono;
+		private string correo;
 
-        public int Id_Tutores { get => id_Tutores; set => id_Tutores = value; }
-        public string Parentesco1 { get => Parentesco; set => Parentesco = value; }
-        public string Direccion1 { get => Direccion; set => Direccion = value; }
-        public string Telefono1 { get => Telefono; set => Telefono = value; }
-        public string Correo1 { get => Correo; set => Correo = value; }
-
-        private string descripcion;
-        private int idTutor;
-
-		private string nombreTutor;
 
         public string Nombretutor { get => nombretutor; set => nombretutor = value; }
+		public int Id_Tutores { get => id_Tutores; set => id_Tutores = value; }
+		public string Parentesco { get => parentesco; set => parentesco = value; }
+		public string Direccion { get => direccion; set => direccion = value; }
+		public string Telefono { get => telefono; set => telefono = value; }
+		public string Correo { get => correo; set => correo = value; }
 
-
-        public DataTable cargarDataGrid()
+		public DataTable cargarDataGrid()
 		{
 			tabla = new DataTable();
 
@@ -89,61 +83,102 @@ namespace pryProyecto
 			return tabla;
 		}
 
-        public string GuardarActualizar(int TipoOperacion)
-        {
-            string msg = "";
-            try
-            {
-                clsConexion conexionBD = new clsConexion();
-                using (var conexion = conexionBD.AbrirConexion())
-                {
-                    switch (TipoOperacion)
-                    {
-                        case 0: // Insertar
-                            {
-                                string sqlN = "INSERT INTO tbltutores (nombreTutor) VALUES (@nombreTutor);";
+		public string GuardarActualizar(int TipoOperacion)
+		{
+			string msg = "";
+			try
+			{
+				clsConexion conexionBD = new clsConexion();
+				using (var conexion = conexionBD.AbrirConexion())
+				{
+					switch (TipoOperacion)
+					{
+						case 0: // Insertar
+							{
+								string sqlN = "INSERT INTO tbltutores (nombreTutor, parentesco, direccion, telefono, correo) VALUES (@nombreTutor, @parentesco, @direccion, @telefono, @correo);";
 
-                                using (comando = new MySqlCommand(sqlN, conexion))
-                                {
-                                    comando.Parameters.AddWithValue("@nombreTutor", nombretutor);
+								using (comando = new MySqlCommand(sqlN, conexion))
+								{
+									comando.Parameters.AddWithValue("@nombreTutor", nombretutor);
+									comando.Parameters.AddWithValue("@parentesco", parentesco);
+									comando.Parameters.AddWithValue("@direccion", direccion);
+									comando.Parameters.AddWithValue("@telefono", telefono);
+									comando.Parameters.AddWithValue("@correo", correo);
 
-                                    int filasAfectadas = comando.ExecuteNonQuery();
+									int filasAfectadas = comando.ExecuteNonQuery();
 
-                                    if (filasAfectadas > 0)
-                                        msg = "El registro se guardó correctamente.";
-                                    else
-                                        msg = "Error, no se guardaron los datos.";
-                                }
-                            }
-                            break;
+									if (filasAfectadas > 0)
+										msg = "El registro se guardó correctamente.";
+									else
+										msg = "Error, no se guardaron los datos.";
+								}
+							}
+							break;
 
-                        case 1: // Actualizar
-                            {
-                                string sqlA = "UPDATE tbltutores SET nombreTutor=@nombreTutor WHERE idTutor=@idTutor;";
+						case 1: // Actualizar
+							{
+								string sqlA = "UPDATE tbltutores SET nombreTutor=@nombreTutor, parentesco=@parentesco, direccion=@direccion, telefono=@telefono, correo=@correo WHERE idTutor=@idTutor;";
 
-                                using (comando = new MySqlCommand(sqlA, conexion))
-                                {
-                                    comando.Parameters.AddWithValue("@idTutor", id_Tutores);
-                                    comando.Parameters.AddWithValue("@nombreTutor", nombretutor);
+								using (comando = new MySqlCommand(sqlA, conexion))
+								{
+									comando.Parameters.AddWithValue("@idTutor", id_Tutores);
+									comando.Parameters.AddWithValue("@nombreTutor", nombretutor);
+									comando.Parameters.AddWithValue("@parentesco", parentesco);
+									comando.Parameters.AddWithValue("@direccion", direccion);
+									comando.Parameters.AddWithValue("@telefono", telefono);
+									comando.Parameters.AddWithValue("@correo", correo);
 
-                                    int filasAfectadas = comando.ExecuteNonQuery();
 
-                                    if (filasAfectadas > 0)
-                                        msg = "El registro se actualizó correctamente.";
-                                    else
-                                        msg = "Error, no se actualizaron los datos.";
-                                }
-                            }
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error: " + ex.Message);
-            }
+									int filasAfectadas = comando.ExecuteNonQuery();
 
-            return msg;
-        }
-    }
+									if (filasAfectadas > 0)
+										msg = "El registro se actualizó correctamente.";
+									else
+										msg = "Error, no se actualizaron los datos.";
+								}
+							}
+							break;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Error: " + ex.Message);
+			}
+
+			return msg;
+		}
+		public string Eliminar()
+		{
+			string msg = "";
+			try
+			{
+				clsConexion conexionBD = new clsConexion();
+				using (var conexion = conexionBD.AbrirConexion())
+				{
+					string sql = "DELETE FROM tbltutores c WHERE c.idTutor = @idTutor;";
+					using (comando = new MySqlCommand(sql, conexion))
+					{
+						comando.Parameters.AddWithValue("@idTutor", id_Tutores);
+						int filasAfectadas = comando.ExecuteNonQuery();
+						if (filasAfectadas > 0)
+						{
+							msg = "Datos eliminados correctamnete";
+						}
+						else
+						{
+							msg = "Los datos no se pudieron eliminar";
+						}
+					}//Libera la eliminacion
+
+				}//Libera las conexion
+
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Error" + ex.Message);
+			}
+			return msg;
+		}
+	}
 }
