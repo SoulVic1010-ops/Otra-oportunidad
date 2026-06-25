@@ -86,6 +86,17 @@ namespace pryProyecto
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void dgvTutores_SelectionChanged(object sender, EventArgs e)
+        {
+            idTutores = int.Parse(dgvTutores.CurrentRow.Cells[0].Value.ToString());
+
+            txtNombre.Text = dgvTutores.CurrentRow.Cells[1].Value.ToString();
+            txtParentesco.Text = dgvTutores.CurrentRow.Cells[2].Value.ToString();
+            txtDireccion.Text = dgvTutores.CurrentRow.Cells[3].Value.ToString();
+            txtTelefono.Text = dgvTutores.CurrentRow.Cells[4].Value.ToString();
+            txtCorreo.Text = dgvTutores.CurrentRow.Cells[5].Value.ToString();
+        }
     }
 }
 

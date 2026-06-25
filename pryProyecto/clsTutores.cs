@@ -16,7 +16,6 @@ namespace pryProyecto
 		private string Telefono;
 		private string Correo;
 
-		public string Nombretutor { get => nombretutor; set => nombretutor = value; }
         public int Id_Tutores { get => id_Tutores; set => id_Tutores = value; }
         public string Parentesco1 { get => Parentesco; set => Parentesco = value; }
         public string Direccion1 { get => Direccion; set => Direccion = value; }
@@ -26,18 +25,10 @@ namespace pryProyecto
         private string descripcion;
         private int idTutor;
 
-		private string nombretutor;
-        //usamos un adaptador
-        private MySqlDataAdapter consulta;
-        //usamos un command para insertar o actualizar
-        private MySqlCommand comando;
-        //Usamos una tabla temporal
-        private DataTable tabla;
+		private string nombreTutor;
 
         public string Nombretutor { get => nombretutor; set => nombretutor = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
-        public int IdTutor { get => idTutor; set => idTutor = value; }
->>>>>>> No che
+
 
         public DataTable cargarDataGrid()
 		{
@@ -97,8 +88,6 @@ namespace pryProyecto
 
 			return tabla;
 		}
-<<<<<<< HEAD
-=======
 
         public string GuardarActualizar(int TipoOperacion)
         {
@@ -155,66 +144,6 @@ namespace pryProyecto
             }
 
             return msg;
-=======
-                        case 0://insertar new
-                            {
-                                string sqlN = "INSERT INTO tblcarreras (nombreCarrera,descrpcion) VALUES ('@nombreCarrera','@descripcion');";
-                                using (comando = new MySqlCommand(sqlN, conexion))
-                                {
-                                    comando.Parameters.AddWithValue("idTutor", idTutor);
-                                    comando.Parameters.AddWithValue("nombreTutor", nombretutor);
-                                    comando.Parameters.AddWithValue("descrpcion", descripcion);
-
-                                    int filasAfectadas = comando.ExecuteNonQuery();
-                                    if (filasAfectadas > 0)
-                                    {
-                                        msg = "el registro se guardo correctamente";
-
-                                    }
-                                    else
-                                    {
-                                        msg = "Error, no se guardaron los dartos...";
-                                    }
-
-
-                                }
-                            }//libera la operacion de la actualizacion
-                            break;
-                        case 1:
-                            {
-                                string sqlA = "UPDATE tblcarreras C SET C.nombreCarrera=@nombreCarrera,C.descrpcion=@descrpcion WHERE C.idCarrera=@idCarrera;";
-                                using (comando = new MySqlCommand(sqlA, conexion))
-                                {
-                                    comando.Parameters.AddWithValue("nombreTutor", nombretutor);
-                                    comando.Parameters.AddWithValue("descrpcion", descripcion);
-
-                                    int filasAfectadas = comando.ExecuteNonQuery();
-                                    if (filasAfectadas > 0)
-                                    {
-                                        msg = "el registro se guardo correctamente";
-
-                                    }
-                                    else
-                                    {
-                                        msg = "Error, no se guardaron los dartos...";
-                                    }
-
-
-                                }
-                            }//Actualizar old
-                            break;
-
-                    }
-
-                }//Libera la conexion
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("error" + ex.Message);
-            }
-
-            return msg;
-
         }
     }
 }
