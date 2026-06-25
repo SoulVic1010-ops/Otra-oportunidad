@@ -78,15 +78,28 @@ namespace pryProyecto
 				tutores.Direccion = txtDireccion.Text;
 				tutores.Telefono = txtTelefono.Text;
 				tutores.Correo = txtCorreo.Text;
-				string msg = tutores.GuardarActualizar(tipoOperacion);
-				MessageBox.Show(msg);
-				CargarGrid();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-		}
+                string msg = "";
+                if (tipoOperacion != 0)
+                {
+                    var resp = MessageBox.Show("¿Confirmar que se desea actualizar el dato seleccionado?", "ALERTA!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (resp == DialogResult.Yes)
+                    {
+                        msg = tutores.GuardarActualizar(tipoOperacion);
+                        MessageBox.Show(msg);
+                    }
+                }
+                else
+                {
+                    msg = tutores.GuardarActualizar(tipoOperacion);
+                    MessageBox.Show(msg);
+                }
+                CargarGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
 		private void dgvTutores_SelectionChanged(object sender, EventArgs e)
 		{
@@ -104,9 +117,13 @@ namespace pryProyecto
 			try
 			{
 				tutores.Id_Tutores = idTutores;
-				string msg = tutores.Eliminar();
-				MessageBox.Show(msg);
-				CargarGrid();
+                var resp = MessageBox.Show("¿Confirmar que se desea eliminar el dato seleccionado?", "ALERTA!!", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+				if (resp == DialogResult.Yes)
+				{
+					string msg = tutores.Eliminar();
+					MessageBox.Show(msg);
+					CargarGrid();
+				}
 			}
 			catch (Exception ex)
 			{

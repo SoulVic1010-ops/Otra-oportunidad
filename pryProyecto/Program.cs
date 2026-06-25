@@ -5,9 +5,6 @@ namespace pryProyecto
 
         static void Main()
         {
-			/*
-            ApplicationConfiguration.Initialize();
-           
             using (frmLogin login = new frmLogin())
             {
                 if (login.ShowDialog() == DialogResult.OK)
@@ -17,8 +14,6 @@ namespace pryProyecto
 
                 }
             }
-            */
-			Application.Run(new frmTutores());
 
 		}
     }

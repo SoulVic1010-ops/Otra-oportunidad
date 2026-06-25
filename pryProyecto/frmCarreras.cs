@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace pryProyecto
 {
@@ -72,8 +73,21 @@ namespace pryProyecto
                 carreras.IdCarrera = idCarrera;
                 carreras.NombreCarrera = txtNombre.Text;
                 carreras.Descripcion = txtDescripcion.Text;
-                string msg = carreras.GuardarActualizar(tipoOperacion);
-                MessageBox.Show(msg);
+                string msg = "";
+                if (tipoOperacion != 0)
+                {
+                    var resp = MessageBox.Show("¿Confirmar que se desea actualizar el dato seleccionado?", "ALERTA!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (resp == DialogResult.Yes)
+                    {
+                        msg = carreras.GuardarActualizar(tipoOperacion);
+                        MessageBox.Show(msg);
+                    }
+                }
+                else
+                {
+                    msg = carreras.GuardarActualizar(tipoOperacion);
+                    MessageBox.Show(msg);
+                }
                 CargarGrid();
             }
             catch (Exception ex)
@@ -88,9 +102,13 @@ namespace pryProyecto
             try
             {
                 carreras.IdCarrera = idCarrera;
-                string msg = carreras.Eliminar();
-                MessageBox.Show(msg);
-                CargarGrid();
+                var resp = MessageBox.Show("¿Confirmar que se desea eliminar el dato seleccionado?", "ALERTA!!", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                if (resp == DialogResult.Yes)
+                {
+                    string msg = carreras.Eliminar();
+                    MessageBox.Show(msg);
+                    CargarGrid();
+                }
             }
             catch (Exception ex)
             {
