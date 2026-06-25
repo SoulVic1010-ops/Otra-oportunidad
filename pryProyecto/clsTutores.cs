@@ -34,7 +34,8 @@ namespace pryProyecto
 
 				using (var conexion = conexionBD.AbrirConexion())
 				{
-					string sql = "SELECT * FROM tblTutores;";
+                    string sql = "SELECT idTutor AS Clave, nombreTutor AS Nombre, parentesco AS Parentesco, direccion AS Dirección, telefono AS Teléfono, correo AS Correo FROM tblTutores;";
+                    
 
 					using (consulta = new MySqlDataAdapter(sql, conexion))
 					{
