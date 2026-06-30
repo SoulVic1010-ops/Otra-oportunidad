@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAlumnos));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             txtMatricula = new TextBox();
             txtNombre = new TextBox();
             txtAPaterno = new TextBox();
@@ -43,21 +43,21 @@
             cmbCarrera = new ComboBox();
             pnlAlumno = new Panel();
             panel1 = new Panel();
-            txtUsuario = new TextBox();
-            txtPassword = new TextBox();
             cmbPerfil = new ComboBox();
+            txtPassword = new TextBox();
+            txtUsuario = new TextBox();
             label1 = new Label();
             label2 = new Label();
             btnEliminar = new Button();
             btnGuardar = new Button();
             btnNuevo = new Button();
             txtNombreCarrera = new TextBox();
-            dgvCarreras = new DataGridView();
+            dgvAlumnos = new DataGridView();
             pcbLogo = new PictureBox();
             lblTitulo = new Label();
             pnlAlumno.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCarreras).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAlumnos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbLogo).BeginInit();
             SuspendLayout();
             // 
@@ -66,6 +66,7 @@
             txtMatricula.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
             txtMatricula.Location = new Point(29, 27);
             txtMatricula.Name = "txtMatricula";
+            txtMatricula.PlaceholderText = "Matricula";
             txtMatricula.Size = new Size(210, 38);
             txtMatricula.TabIndex = 0;
             // 
@@ -74,6 +75,7 @@
             txtNombre.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
             txtNombre.Location = new Point(29, 71);
             txtNombre.Name = "txtNombre";
+            txtNombre.PlaceholderText = "Nombre";
             txtNombre.Size = new Size(210, 38);
             txtNombre.TabIndex = 1;
             // 
@@ -82,6 +84,7 @@
             txtAPaterno.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
             txtAPaterno.Location = new Point(29, 115);
             txtAPaterno.Name = "txtAPaterno";
+            txtAPaterno.PlaceholderText = "Apellido Paterno";
             txtAPaterno.Size = new Size(210, 38);
             txtAPaterno.TabIndex = 2;
             // 
@@ -90,6 +93,7 @@
             txtAMaterno.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
             txtAMaterno.Location = new Point(29, 159);
             txtAMaterno.Name = "txtAMaterno";
+            txtAMaterno.PlaceholderText = "Apellido Materno";
             txtAMaterno.Size = new Size(210, 38);
             txtAMaterno.TabIndex = 3;
             // 
@@ -98,6 +102,7 @@
             txtDireccion.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
             txtDireccion.Location = new Point(29, 203);
             txtDireccion.Name = "txtDireccion";
+            txtDireccion.PlaceholderText = "Dirreción";
             txtDireccion.Size = new Size(210, 38);
             txtDireccion.TabIndex = 4;
             // 
@@ -106,6 +111,7 @@
             txtTelefono.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
             txtTelefono.Location = new Point(245, 27);
             txtTelefono.Name = "txtTelefono";
+            txtTelefono.PlaceholderText = "Teléfono";
             txtTelefono.Size = new Size(210, 38);
             txtTelefono.TabIndex = 5;
             // 
@@ -114,6 +120,7 @@
             txtCorreo.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
             txtCorreo.Location = new Point(245, 71);
             txtCorreo.Name = "txtCorreo";
+            txtCorreo.PlaceholderText = "Correo";
             txtCorreo.Size = new Size(210, 38);
             txtCorreo.TabIndex = 6;
             // 
@@ -122,6 +129,7 @@
             txtPromedioBachiller.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
             txtPromedioBachiller.Location = new Point(245, 115);
             txtPromedioBachiller.Name = "txtPromedioBachiller";
+            txtPromedioBachiller.PlaceholderText = "Promedio Bachillerato";
             txtPromedioBachiller.Size = new Size(210, 38);
             txtPromedioBachiller.TabIndex = 7;
             // 
@@ -145,6 +153,8 @@
             // 
             // pnlAlumno
             // 
+            pnlAlumno.BackColor = Color.FromArgb(192, 192, 255);
+            pnlAlumno.BorderStyle = BorderStyle.Fixed3D;
             pnlAlumno.Controls.Add(cmbCarrera);
             pnlAlumno.Controls.Add(cmbTutor);
             pnlAlumno.Controls.Add(txtPromedioBachiller);
@@ -162,6 +172,8 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(192, 192, 255);
+            panel1.BorderStyle = BorderStyle.Fixed3D;
             panel1.Controls.Add(cmbPerfil);
             panel1.Controls.Add(txtPassword);
             panel1.Controls.Add(txtUsuario);
@@ -169,22 +181,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(376, 257);
             panel1.TabIndex = 11;
-            // 
-            // txtUsuario
-            // 
-            txtUsuario.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
-            txtUsuario.Location = new Point(20, 18);
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(316, 38);
-            txtUsuario.TabIndex = 0;
-            // 
-            // txtPassword
-            // 
-            txtPassword.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
-            txtPassword.Location = new Point(20, 62);
-            txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(316, 38);
-            txtPassword.TabIndex = 1;
             // 
             // cmbPerfil
             // 
@@ -195,6 +191,24 @@
             cmbPerfil.Name = "cmbPerfil";
             cmbPerfil.Size = new Size(316, 39);
             cmbPerfil.TabIndex = 2;
+            // 
+            // txtPassword
+            // 
+            txtPassword.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
+            txtPassword.Location = new Point(20, 62);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PlaceholderText = "Password";
+            txtPassword.Size = new Size(316, 38);
+            txtPassword.TabIndex = 1;
+            // 
+            // txtUsuario
+            // 
+            txtUsuario.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
+            txtUsuario.Location = new Point(20, 18);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.PlaceholderText = "Usuario";
+            txtUsuario.Size = new Size(316, 38);
+            txtUsuario.TabIndex = 0;
             // 
             // label1
             // 
@@ -263,32 +277,32 @@
             txtNombreCarrera.Size = new Size(254, 39);
             txtNombreCarrera.TabIndex = 18;
             // 
-            // dgvCarreras
+            // dgvAlumnos
             // 
-            dgvCarreras.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(192, 255, 255);
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Blue;
-            dgvCarreras.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dgvCarreras.BackgroundColor = SystemColors.ControlLight;
-            dgvCarreras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.InactiveCaption;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvCarreras.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvCarreras.EnableHeadersVisualStyles = false;
-            dgvCarreras.Location = new Point(84, 517);
-            dgvCarreras.Margin = new Padding(3, 4, 3, 4);
-            dgvCarreras.Name = "dgvCarreras";
-            dgvCarreras.RowHeadersWidth = 51;
-            dgvCarreras.RowTemplate.Height = 45;
-            dgvCarreras.Size = new Size(939, 155);
-            dgvCarreras.TabIndex = 16;
+            dgvAlumnos.AllowUserToAddRows = false;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(192, 255, 255);
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Blue;
+            dgvAlumnos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dgvAlumnos.BackgroundColor = SystemColors.ControlLight;
+            dgvAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.InactiveCaption;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvAlumnos.DefaultCellStyle = dataGridViewCellStyle4;
+            dgvAlumnos.EnableHeadersVisualStyles = false;
+            dgvAlumnos.Location = new Point(84, 517);
+            dgvAlumnos.Margin = new Padding(3, 4, 3, 4);
+            dgvAlumnos.Name = "dgvAlumnos";
+            dgvAlumnos.RowHeadersWidth = 51;
+            dgvAlumnos.RowTemplate.Height = 45;
+            dgvAlumnos.Size = new Size(939, 155);
+            dgvAlumnos.TabIndex = 16;
             // 
             // pcbLogo
             // 
@@ -323,7 +337,7 @@
             Controls.Add(btnGuardar);
             Controls.Add(btnNuevo);
             Controls.Add(txtNombreCarrera);
-            Controls.Add(dgvCarreras);
+            Controls.Add(dgvAlumnos);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(panel1);
@@ -334,7 +348,7 @@
             pnlAlumno.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCarreras).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAlumnos).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -363,7 +377,7 @@
         private Button btnGuardar;
         private Button btnNuevo;
         private TextBox txtNombreCarrera;
-        private DataGridView dgvCarreras;
+        private DataGridView dgvAlumnos;
         private PictureBox pcbLogo;
         private Label lblTitulo;
     }
