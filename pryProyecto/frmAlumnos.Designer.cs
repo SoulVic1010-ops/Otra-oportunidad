@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAlumnos));
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             txtMatricula = new TextBox();
             txtNombre = new TextBox();
             txtAPaterno = new TextBox();
@@ -42,7 +42,7 @@
             cmbTutor = new ComboBox();
             cmbCarrera = new ComboBox();
             pnlAlumno = new Panel();
-            panel1 = new Panel();
+            pnlUsuario = new Panel();
             cmbPerfil = new ComboBox();
             txtPassword = new TextBox();
             txtUsuario = new TextBox();
@@ -51,12 +51,12 @@
             btnEliminar = new Button();
             btnGuardar = new Button();
             btnNuevo = new Button();
-            txtNombreCarrera = new TextBox();
+            txtMatriculaAlumno = new TextBox();
             dgvAlumnos = new DataGridView();
             pcbLogo = new PictureBox();
             lblTitulo = new Label();
             pnlAlumno.SuspendLayout();
-            panel1.SuspendLayout();
+            pnlUsuario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAlumnos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbLogo).BeginInit();
             SuspendLayout();
@@ -170,17 +170,17 @@
             pnlAlumno.Size = new Size(544, 257);
             pnlAlumno.TabIndex = 10;
             // 
-            // panel1
+            // pnlUsuario
             // 
-            panel1.BackColor = Color.FromArgb(192, 192, 255);
-            panel1.BorderStyle = BorderStyle.Fixed3D;
-            panel1.Controls.Add(cmbPerfil);
-            panel1.Controls.Add(txtPassword);
-            panel1.Controls.Add(txtUsuario);
-            panel1.Location = new Point(663, 127);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(376, 257);
-            panel1.TabIndex = 11;
+            pnlUsuario.BackColor = Color.FromArgb(192, 192, 255);
+            pnlUsuario.BorderStyle = BorderStyle.Fixed3D;
+            pnlUsuario.Controls.Add(cmbPerfil);
+            pnlUsuario.Controls.Add(txtPassword);
+            pnlUsuario.Controls.Add(txtUsuario);
+            pnlUsuario.Location = new Point(663, 127);
+            pnlUsuario.Name = "pnlUsuario";
+            pnlUsuario.Size = new Size(376, 257);
+            pnlUsuario.TabIndex = 11;
             // 
             // cmbPerfil
             // 
@@ -266,35 +266,37 @@
             btnNuevo.Size = new Size(145, 72);
             btnNuevo.TabIndex = 14;
             btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.Click += btnNuevo_Click;
             // 
-            // txtNombreCarrera
+            // txtMatriculaAlumno
             // 
-            txtNombreCarrera.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtNombreCarrera.Location = new Point(769, 470);
-            txtNombreCarrera.Margin = new Padding(3, 4, 3, 4);
-            txtNombreCarrera.Name = "txtNombreCarrera";
-            txtNombreCarrera.PlaceholderText = "Buscar Alumno";
-            txtNombreCarrera.Size = new Size(254, 39);
-            txtNombreCarrera.TabIndex = 18;
+            txtMatriculaAlumno.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtMatriculaAlumno.Location = new Point(769, 470);
+            txtMatriculaAlumno.Margin = new Padding(3, 4, 3, 4);
+            txtMatriculaAlumno.Name = "txtMatriculaAlumno";
+            txtMatriculaAlumno.PlaceholderText = "Buscar por matricula";
+            txtMatriculaAlumno.Size = new Size(254, 39);
+            txtMatriculaAlumno.TabIndex = 18;
+            txtMatriculaAlumno.TextChanged += txtNombreAlumno_TextChanged;
             // 
             // dgvAlumnos
             // 
             dgvAlumnos.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(192, 255, 255);
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.Blue;
-            dgvAlumnos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(192, 255, 255);
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.Blue;
+            dgvAlumnos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvAlumnos.BackgroundColor = SystemColors.ControlLight;
             dgvAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.InactiveCaption;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvAlumnos.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.InactiveCaption;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvAlumnos.DefaultCellStyle = dataGridViewCellStyle2;
             dgvAlumnos.EnableHeadersVisualStyles = false;
             dgvAlumnos.Location = new Point(84, 517);
             dgvAlumnos.Margin = new Padding(3, 4, 3, 4);
@@ -303,6 +305,7 @@
             dgvAlumnos.RowTemplate.Height = 45;
             dgvAlumnos.Size = new Size(939, 155);
             dgvAlumnos.TabIndex = 16;
+            dgvAlumnos.SelectionChanged += dgvAlumnos_SelectionChanged;
             // 
             // pcbLogo
             // 
@@ -336,18 +339,18 @@
             Controls.Add(btnEliminar);
             Controls.Add(btnGuardar);
             Controls.Add(btnNuevo);
-            Controls.Add(txtNombreCarrera);
+            Controls.Add(txtMatriculaAlumno);
             Controls.Add(dgvAlumnos);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(panel1);
+            Controls.Add(pnlUsuario);
             Controls.Add(pnlAlumno);
             Name = "frmAlumnos";
             Text = "Registro de alumnos";
             pnlAlumno.ResumeLayout(false);
             pnlAlumno.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            pnlUsuario.ResumeLayout(false);
+            pnlUsuario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAlumnos).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbLogo).EndInit();
             ResumeLayout(false);
@@ -367,7 +370,7 @@
         private ComboBox cmbTutor;
         private ComboBox cmbCarrera;
         private Panel pnlAlumno;
-        private Panel panel1;
+        private Panel pnlUsuario;
         private TextBox txtUsuario;
         private ComboBox cmbPerfil;
         private TextBox txtPassword;
@@ -376,7 +379,7 @@
         private Button btnEliminar;
         private Button btnGuardar;
         private Button btnNuevo;
-        private TextBox txtNombreCarrera;
+        private TextBox txtMatriculaAlumno;
         private DataGridView dgvAlumnos;
         private PictureBox pcbLogo;
         private Label lblTitulo;

@@ -15,6 +15,8 @@ namespace pryProyecto
     {
         clsAlumnos alumnos;
 
+        int idMatricula;
+        int idUsuario;
         public frmAlumnos()
         {
             InitializeComponent();
@@ -30,7 +32,19 @@ namespace pryProyecto
             dgvAlumnos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             try
             {
+                //Asignamos la tabla virtual de la clase directamente al control visual
                 dgvAlumnos.DataSource = alumnos.cargarDataGrid();
+                dgvAlumnos.Columns["Usuario"].Visible = false;
+                dgvAlumnos.Columns["vchpassword"].Visible = false;
+                dgvAlumnos.Columns["vchperfil"].Visible = false;
+                dgvAlumnos.Columns["direccion"].Visible = false;
+                dgvAlumnos.Columns["correo"].Visible = false;
+                dgvAlumnos.Columns["telefono"].Visible = false;
+                dgvAlumnos.Columns["promedioBachillerato"].Visible = false;
+                dgvAlumnos.Columns["idTutor"].Visible = false;
+                dgvAlumnos.Columns["idCarrera"].Visible = false;
+                dgvAlumnos.Columns["idUsuario"].Visible = false;
+
             }
             catch (Exception ex)
             {
@@ -56,7 +70,7 @@ namespace pryProyecto
                 cmbCarrera.ValueMember = "idCarrera"; //La llave primaria real
                 cmbCarrera.SelectedIndex = 0; //Forzar a que muestre el placeholder
 
-                
+
                 DataTable dtTutores = alumnos.ObtenerTutores();
                 DataRow filaPTutores = dtTutores.NewRow();
                 filaPTutores["idTutor"] = 0;
@@ -76,6 +90,71 @@ namespace pryProyecto
             }
 
 
+
+        }
+
+        private void dgvAlumnos_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // Esto es para poder saber si es nuevo o vamos a actualizar
+                idMatricula = int.Parse(dgvAlumnos.CurrentRow.Cells["matricula"].Value.ToString());
+                idUsuario = int.Parse(dgvAlumnos.CurrentRow.Cells["idUsuario"].Value.ToString());
+
+                // Esto es para la tabla alumnos
+                txtMatricula.Text = idMatricula.ToString();
+                txtNombre.Text = dgvAlumnos.CurrentRow.Cells["Nombre"].Value.ToString();
+                txtAPaterno.Text = dgvAlumnos.CurrentRow.Cells["A. Paterno"].Value.ToString();
+                txtAMaterno.Text = dgvAlumnos.CurrentRow.Cells["A. Materno"].Value.ToString();
+                txtDireccion.Text = dgvAlumnos.CurrentRow.Cells["direccion"].Value.ToString();
+                txtTelefono.Text = dgvAlumnos.CurrentRow.Cells["telefono"].Value.ToString();
+                txtCorreo.Text = dgvAlumnos.CurrentRow.Cells["correo"].Value.ToString();
+                txtPromedioBachiller.Text = dgvAlumnos.CurrentRow.Cells["promedioBachillerato"].Value.ToString();
+
+                //Esto es para la tabla Usuarios
+                txtUsuario.Text = dgvAlumnos.CurrentRow.Cells["Usuario"].Value.ToString();
+                txtPassword.Text = dgvAlumnos.CurrentRow.Cells["vchpassword"].Value.ToString();
+                cmbPerfil.Text = dgvAlumnos.CurrentRow.Cells["vchperfil"].Value.ToString();
+
+                // Usar selected Value para apuntar el dato preciso de cada registro
+                cmbCarrera.SelectedValue = int.Parse(dgvAlumnos.CurrentRow.Cells["idCarrera"].Value.ToString());
+                cmbTutor.SelectedValue = int.Parse(dgvAlumnos.CurrentRow.Cells["idTutor"].Value.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al mapear los datos seleccionados: " + ex.Message);
+            }
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            idMatricula = 0;
+            idUsuario = 0;
+            alumnos.LimpiarPanel(pnlAlumno);
+            alumnos.LimpiarPanel(pnlUsuario);
+            txtMatricula.Focus();
+        }
+
+        private void txtNombreAlumno_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMatriculaAlumno.Text))
+            {
+                CargarGrid();
+                return;
+            }
+            alumnos = new clsAlumnos();
+            dgvAlumnos.DataSource = null;
+            dgvAlumnos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            try
+            {
+                alumnos.Matricula = int.Parse(txtMatriculaAlumno.Text);
+                dgvAlumnos.DataSource = alumnos.Consultar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Requiere asignar datos " + ex.Message);
+
+            }
 
         }
     }
