@@ -23,9 +23,14 @@ namespace pryProyecto
         private int idTutor; //foraneo
         private int idCarrera; //foraneo
         private int idUsuario;
-
+        //Estos atributos agregamos para registrar el usuario
+        private string nombreUsuario;
+        private string password;
+        private string perfil;
+        //Adaptador y tabla virtuales de la clase
         private MySqlDataAdapter consulta;
         private DataTable tabla;
+        private MySqlCommand comando;
 
         //Propiedades
         public int Matricula { get => matricula; set => matricula = value; }
@@ -40,6 +45,9 @@ namespace pryProyecto
         public int IdTutor { get => idTutor; set => idTutor = value; }
         public int IdCarrera { get => idCarrera; set => idCarrera = value; }
         public int IdUsuario { get => idUsuario; set => idUsuario = value; }
+        public string NombreUsuario { get => nombreUsuario; set => nombreUsuario = value; }
+        public string Password { get => password; set => password = value; }
+        public string Perfil { get => perfil; set => perfil = value; }
 
         public DataTable cargarDataGrid()
         {
