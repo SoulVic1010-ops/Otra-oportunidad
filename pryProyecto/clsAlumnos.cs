@@ -199,5 +199,34 @@ namespace pryProyecto
             }
             return tabla;
         }
+        /*public string GuardarActualizar(int tipoOperacion)
+        {
+            string msg = "";
+            clsConexion conexionBD = new clsConexion();
+
+            try
+            {
+
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    using (var transaccion = conexion.BeginTransaction())
+                    {
+                        try
+                        {
+                            switch (tipoOperacion)
+                            {
+                                case 0: //NUEVO E INSERTAR
+                                    string sqlInsUser = "INSERT INTO tblUsuarios(vchnombreUsuario, vchpassword,vchperfil, vchestado)";
+                                    int nuevoIdUsuario = 0;
+                                    using (comando = new MySqlCommand(sqlInsUser, conexion, transaccion)
+                                    {
+
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+        }*/
     }
 }
