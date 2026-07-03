@@ -199,7 +199,7 @@ namespace pryProyecto
             }
             return tabla;
         }
-        /*public string GuardarActualizar(int tipoOperacion)
+       /* public string GuardarActualizar(int tipoOperacion)
         {
             string msg = "";
             clsConexion conexionBD = new clsConexion();
@@ -216,12 +216,39 @@ namespace pryProyecto
                             switch (tipoOperacion)
                             {
                                 case 0: //NUEVO E INSERTAR
-                                    string sqlInsUser = "INSERT INTO tblUsuarios(vchnombreUsuario, vchpassword,vchperfil, vchestado)";
+                                    string sqlInsUser = "INSERT INTO tblUsuarios(vchnombreUsuario, vchpassword,vchperfil, vchestado)" +
+                                                        "Values(@nomUser,MD5(@pass),@perfil,'Activo');SELECT LAST_INSERT_ID();";
                                     int nuevoIdUsuario = 0;
-                                    using (comando = new MySqlCommand(sqlInsUser, conexion, transaccion)
+                                    using (comando = new MySqlCommand(sqlInsUser, conexion, transaccion))
                                     {
+                                        comando.Parameters.AddWithValue("@nomUser", nombreUsuario);
+                                        comando.Parameters.AddWithValue("@pass", password);
+                                        comando.Parameters.AddWithValue("@perfil", perfil);
+                                        nuevoIdUsuario = Convert.ToInt32(comando.ExecuteScalar());
 
                                     }
+
+                                    string sqlInsAlumno = "INSERT INTO tblAlumnos(matricula, idusuario,nombreAlumno, apellidoP, apellidoM, direccion,telefono,correo,promedioBachillerato,idTutor,idCarrera)" +
+                                                        "Values(@matricula,@idusuario,@nombre,@apP,@apM,@dir,@tel,@correo,@prom, @idTutores,@idCarrera);";
+                                    using (comando = new MySqlCommand(sqlInsAlumno, conexion, transaccion))
+                                    {
+                                        comando.Parameters.AddWithValue("@matricula", matricula);
+                                        comando.Parameters.AddWithValue("@idusuario", nuevoIdUsuario);
+                                        comando.Parameters.AddWithValue("@nombre", nombreAlumno);
+                                        comando.Parameters.AddWithValue("@apP", apellidoP);
+                                        comando.Parameters.AddWithValue("@apM", apellidoM);
+                                        comando.Parameters.AddWithValue("@dir", direccion);
+                                        comando.Parameters.AddWithValue("@tel", telefono);
+                                        comando.Parameters.AddWithValue("@correo", correo);
+                                        comando.Parameters.AddWithValue("@prom", promedioBachillerato);
+                                        comando.Parameters.AddWithValue("@idTutor", idTutor);
+                                        comando.Parameters.AddWithValue("@idCarrera", idCarrera);
+                                        comando.ExecuteNonQuery();
+                                    }
+                                    msg = "El alumno y sus credeciales";
+                                    break;
+                            
+                            
                             }
                         }
                     }
