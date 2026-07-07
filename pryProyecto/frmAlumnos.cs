@@ -162,22 +162,14 @@ namespace pryProyecto
         {
             try
             {
-                // Validación de campos obligatorios del bloque Usuario
-                if (string.IsNullOrWhiteSpace(txtUsuario.Text) ||
-                    string.IsNullOrWhiteSpace(txtPassword.Text) ||
-                    string.IsNullOrWhiteSpace(cmbPerfil.Text))
-                {
-                    MessageBox.Show("Debes llenar Usuario, Password y Perfil antes de guardar.",
-                                    "Campos obligatorios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // Bloquea el guardado
-                }
 
-                //determinamos el tipo de operacion
+
+                // Determinamos el tipo de operación
                 int tipoOperacion = idMatricula == 0 ? 0 : 1;
 
                 alumnos = new clsAlumnos();
 
-                //1.Llenamos las propiedades del bloque alumno
+                // Llenamos las propiedades del bloque alumno
                 alumnos.Matricula = int.Parse(txtMatricula.Text);
                 alumnos.NombreAlumno = txtNombre.Text;
                 alumnos.ApellidoP = txtAPaterno.Text;
@@ -189,7 +181,7 @@ namespace pryProyecto
                 alumnos.IdCarrera = Convert.ToInt32(cmbCarrera.SelectedValue);
                 alumnos.IdTutor = Convert.ToInt32(cmbTutor.SelectedValue);
 
-                //2.Llenamos las propiedades del bloque Usuario
+                // Llenamos las propiedades del bloque Usuario
                 alumnos.IdUsuario = idUsuario;
                 alumnos.NombreUsuario = txtUsuario.Text;
                 alumnos.Password = txtPassword.Text;
