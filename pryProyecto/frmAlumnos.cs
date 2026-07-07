@@ -162,12 +162,22 @@ namespace pryProyecto
         {
             try
             {
+                // Validación de campos obligatorios del bloque Usuario
+                if (string.IsNullOrWhiteSpace(txtUsuario.Text) ||
+                    string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                    string.IsNullOrWhiteSpace(cmbPerfil.Text))
+                {
+                    MessageBox.Show("Debes llenar Usuario, Password y Perfil antes de guardar.",
+                                    "Campos obligatorios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return; // Bloquea el guardado
+                }
+
                 //determinamos el tipo de operacion
                 int tipoOperacion = idMatricula == 0 ? 0 : 1;
 
                 alumnos = new clsAlumnos();
 
-                //1.Llenamos las popriedades del bloque alumno
+                //1.Llenamos las propiedades del bloque alumno
                 alumnos.Matricula = int.Parse(txtMatricula.Text);
                 alumnos.NombreAlumno = txtNombre.Text;
                 alumnos.ApellidoP = txtAPaterno.Text;
@@ -180,33 +190,35 @@ namespace pryProyecto
                 alumnos.IdTutor = Convert.ToInt32(cmbTutor.SelectedValue);
 
                 //2.Llenamos las propiedades del bloque Usuario
-                alumnos.IdUsuario = idUsuario; //Sera 0 si es nuevo, o el ID real si es update
+                alumnos.IdUsuario = idUsuario;
                 alumnos.NombreUsuario = txtUsuario.Text;
                 alumnos.Password = txtPassword.Text;
                 alumnos.Perfil = cmbPerfil.Text;
 
                 string msg = "";
 
-                //si es una modificacion (tipoOperacion = 1), pedimos confirmacion como en carreras
                 if (tipoOperacion == 1)
                 {
-                    var resp = MessageBox.Show("¿Confirmar que deseas actualizar los datos de este alumno?", "ALERTA", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var resp = MessageBox.Show("¿Confirmar que deseas actualizar los datos de este alumno?",
+                                               "ALERTA", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (resp == DialogResult.Yes)
                     {
                         msg = alumnos.GuardarActualizar(tipoOperacion);
-                        MessageBox.Show(msg, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(msg, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-                else //si es nuevo (tipoOperacion = 0), se guarda directo
+                else
                 {
                     msg = alumnos.GuardarActualizar(tipoOperacion);
-                    MessageBox.Show(msg, "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(msg, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                CargarGrid(); //Refrescamos la tabla del formulario para ver los cambios 
+
+                CargarGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pusieron guardar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se pudieron guardar los datos: " + ex.Message,
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
