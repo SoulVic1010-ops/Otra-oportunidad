@@ -51,7 +51,7 @@ namespace pryProyecto
 					string sql = "SELECT D.claveDocente AS Clave, " +
 								 "D.nombreDocente AS Nombre, " +
 								 "D.puesto AS Puesto, " +
-								 "D.telefono AS Teléfono, " +
+								 "D.telefono AS Telefono, " +
 								 "D.correo AS Correo, " +
 								 "U.vchnombreUsuario AS Usuario, " +
 								 "U.vchpassword, " +
