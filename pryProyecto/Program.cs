@@ -10,7 +10,7 @@ namespace pryProyecto
                 if (login.ShowDialog() == DialogResult.OK)
                 {
 
-                    Application.Run(new frmDocente());
+                    Application.Run(new frmPrincipal());
 
                 }
             }
