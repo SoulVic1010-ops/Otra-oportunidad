@@ -85,11 +85,6 @@ namespace pryProyecto
 				{
 					((TextBox)control).Clear();
 				}
-
-				else if (control is ComboBox)
-				{
-					((ComboBox)control).SelectedIndex = 0;
-				}
 			}
 		}
 
