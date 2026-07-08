@@ -154,5 +154,27 @@ namespace pryProyecto
                 }
             }
         }
+
+        private void txtMatriculaDocente_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMatriculaDocente.Text))
+            {
+                CargarGrid();
+                return;
+            }
+            docente = new clsDocente();
+            dgvDocente.DataSource = null;
+            dgvDocente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            try
+            {
+                docente.ClaveDocente = int.Parse(txtMatriculaDocente.Text);
+                dgvDocente.DataSource = docente.Consultar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Requiere asignar datos " + ex.Message);
+
+            }
+        }
     }
 }
